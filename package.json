@@ -1,0 +1,15 @@
+{
+  "name": "jangnan-messenger-server",
+  "version": "0.1.0",
+  "description": "장난메신저 중계 서버 (인터넷용)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
