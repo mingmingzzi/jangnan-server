@@ -52,8 +52,10 @@ wss.on('connection', ws => {
     if (m.type === 'chat') {
       const text = String(m.text || '').slice(0, 200).trim();
       if (!text) return;
+      const all = m.to === '*'; // '*' = 방 전체에게
       for (const [w, c] of clients) {
-        if (c.room === me.room && c.id === String(m.to)) send(w, { type: 'chat', from: me.id, text });
+        if (c.room !== me.room || w === ws) continue;
+        if (all || c.id === String(m.to)) send(w, { type: 'chat', from: me.id, text, all });
       }
     } else if (m.type === 'sign') { // 자리 비움 팻말: 방 전체 명단에 반영
       me.sign = String(m.text || '').trim().slice(0, 40);
